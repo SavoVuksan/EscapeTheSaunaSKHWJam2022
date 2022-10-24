@@ -1,0 +1,310 @@
+{
+  "app_key": "application.generated.unity.hurricanevr.exe",
+  "bindings": {
+    "/actions/hvr": {
+      "chords": [],
+      "poses": [],
+      "haptics": [
+        {
+          "output": "/actions/hvr/out/haptics",
+          "path": "/user/hand/left/output/haptic"
+        },
+        {
+          "output": "/actions/hvr/out/righthaptics",
+          "path": "/user/hand/right/output/haptic"
+        }
+      ],
+      "sources": [
+        {
+          "path": "/user/hand/left/input/trigger",
+          "mode": "trigger",
+          "parameters": {},
+          "inputs": {
+            "pull": {
+              "output": "/actions/hvr/in/lefttrigger"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/lefttriggertouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trigger",
+          "mode": "trigger",
+          "parameters": {},
+          "inputs": {
+            "pull": {
+              "output": "/actions/hvr/in/righttrigger"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/righttriggertouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/trackpad",
+          "mode": "trackpad",
+          "parameters": {},
+          "inputs": {
+            "position": {
+              "output": "/actions/hvr/in/leftprimaryaxis"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftprimaryaxistouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trackpad",
+          "mode": "trackpad",
+          "parameters": {},
+          "inputs": {
+            "position": {
+              "output": "/actions/hvr/in/rightprimaryaxis"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/rightprimaryaxistouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/application_menu",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftmenu"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/application_menu",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/rightmenu"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/joystick",
+          "mode": "joystick",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftprimaryaxisclick"
+            },
+            "position": {
+              "output": "/actions/hvr/in/leftprimaryaxis"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftprimaryaxistouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/joystick",
+          "mode": "joystick",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/rightprimaryaxisclick"
+            },
+            "position": {
+              "output": "/actions/hvr/in/rightprimaryaxis"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/rightprimaryaxistouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/a",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftprimary"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftprimarytouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/b",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftsecondary"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftsecondarytouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/thumbstick",
+          "mode": "joystick",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftprimaryaxisclick"
+            },
+            "position": {
+              "output": "/actions/hvr/in/leftprimaryaxis"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftprimaryaxistouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/thumbstick",
+          "mode": "joystick",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/rightprimaryaxisclick"
+            },
+            "position": {
+              "output": "/actions/hvr/in/rightprimaryaxis"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/rightprimaryaxistouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/b",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/rightsecondary"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/rightsecondarytouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/a",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/rightprimary"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/rightprimarytouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/trackpad",
+          "mode": "dpad",
+          "parameters": {
+            "sub_mode": "click"
+          },
+          "inputs": {
+            "center": {
+              "output": "/actions/hvr/in/leftprimaryaxisclick"
+            },
+            "north": {
+              "output": "/actions/hvr/in/leftsecondary"
+            },
+            "south": {
+              "output": "/actions/hvr/in/leftprimary"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trackpad",
+          "mode": "dpad",
+          "parameters": {
+            "sub_mode": "click"
+          },
+          "inputs": {
+            "center": {
+              "output": "/actions/hvr/in/rightprimaryaxisclick"
+            },
+            "north": {
+              "output": "/actions/hvr/in/rightsecondary"
+            },
+            "south": {
+              "output": "/actions/hvr/in/rightprimary"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/x",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftprimary"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftprimarytouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/y",
+          "mode": "button",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftsecondary"
+            },
+            "touch": {
+              "output": "/actions/hvr/in/leftsecondarytouch"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/grip",
+          "mode": "trigger",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/leftgripbutton"
+            },
+            "pull": {
+              "output": "/actions/hvr/in/leftgrip"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/grip",
+          "mode": "trigger",
+          "parameters": {},
+          "inputs": {
+            "click": {
+              "output": "/actions/hvr/in/rightgripbutton"
+            },
+            "pull": {
+              "output": "/actions/hvr/in/rightgrip"
+            }
+          }
+        }
+      ],
+      "skeleton": [
+        {
+          "output": "/actions/hvr/in/left_skeleton",
+          "path": "/user/hand/left/input/skeleton/left"
+        },
+        {
+          "output": "/actions/hvr/in/right_skeleton",
+          "path": "/user/hand/right/input/skeleton/right"
+        }
+      ]
+    }
+  },
+  "controller_type": "oculus_touch",
+  "description": "",
+  "name": "Oculus"
+}

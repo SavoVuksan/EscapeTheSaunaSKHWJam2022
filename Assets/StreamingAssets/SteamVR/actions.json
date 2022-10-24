@@ -1,0 +1,243 @@
+{
+  "actions": [
+    {
+      "name": "/actions/HVR/in/LeftGrip",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/HVR/in/LeftTrigger",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/HVR/in/LeftPrimary",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftPrimaryTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftSecondary",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftSecondaryTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftMenu",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftPrimaryAxisClick",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftSecondaryAxisClick",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftPrimaryAxisTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftTriggerTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftThumbTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftTriggerNearTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftThumbNearTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftPrimaryAxis",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/HVR/in/LeftSecondaryAxis",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/HVR/in/LeftSecondaryAxisTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftGripButton",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/LeftTriggerButton",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightGrip",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/HVR/in/RightTrigger",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/HVR/in/RightPrimary",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightPrimaryTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightSecondary",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightSecondaryTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightMenu",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightPrimaryAxisClick",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightSecondaryAxisClick",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightPrimaryAxisTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightTriggerTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightThumbTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightTriggerNearTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightThumbNearTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightPrimaryAxis",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/HVR/in/RightSecondaryAxis",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/HVR/in/RightSecondaryAxisTouch",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightGripButton",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/RightTriggerButton",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/HVR/in/left_skeleton",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left"
+    },
+    {
+      "name": "/actions/HVR/in/right_skeleton",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right"
+    },
+    {
+      "name": "/actions/HVR/in/LeftGripForce",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/HVR/in/RightGripForce",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/HVR/out/Haptics",
+      "type": "vibration"
+    },
+    {
+      "name": "/actions/HVR/out/RightHaptics",
+      "type": "vibration"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/HVR",
+      "usage": "leftright"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive_controller.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "holographic_controller",
+      "binding_url": "bindings_holographic_controller.json"
+    },
+    {
+      "controller_type": "vive_cosmos_controller",
+      "binding_url": "bindings_vive_cosmos_controller.json"
+    },
+    {
+      "controller_type": "logitech_stylus",
+      "binding_url": "bindings_logitech_stylus.json"
+    },
+    {
+      "controller_type": "vive_cosmos",
+      "binding_url": "binding_vive_cosmos.json"
+    },
+    {
+      "controller_type": "vive",
+      "binding_url": "binding_vive.json"
+    },
+    {
+      "controller_type": "indexhmd",
+      "binding_url": "binding_index_hmd.json"
+    },
+    {
+      "controller_type": "vive_pro",
+      "binding_url": "binding_vive_pro.json"
+    },
+    {
+      "controller_type": "rift",
+      "binding_url": "binding_rift.json"
+    },
+    {
+      "controller_type": "holographic_hmd",
+      "binding_url": "binding_holographic_hmd.json"
+    },
+    {
+      "controller_type": "vive_tracker_camera",
+      "binding_url": "binding_vive_tracker_camera.json"
+    }
+  ],
+  "localization": []
+}
