@@ -8,7 +8,7 @@ public class StateManager : MonoBehaviour
     [Header("State Machine")]
     [SerializeField]
     private string currentStateName;
-    private IState currentState;
+    public IState CurrentState;
 
     private object _holder;
 
@@ -30,24 +30,24 @@ public class StateManager : MonoBehaviour
     public virtual void Update()
     {
 
-        currentState?.updateState(this);
+        CurrentState?.updateState(this);
 
     }
     public virtual void FixedUpdate()
     {
         //FSM 
-        currentState?.FixedUpdateState(this);
+        CurrentState?.FixedUpdateState(this);
 
     }
 
     public void setNewState(IState newState)
     {
-        currentState?.exitState(this);
+        CurrentState?.exitState(this);
 
-        currentState = newState;
+        CurrentState = newState;
         currentStateName = newState.ToString();
 
-        currentState.enterState(this);
+        CurrentState.enterState(this);
     }
 
 }
