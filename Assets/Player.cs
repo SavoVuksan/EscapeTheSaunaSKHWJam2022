@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  
 
-    // Update is called once per frame
+    public fondleTarget slong;
+    public fondleTarget towel;
+
+
     void Update()
     {
         
+    }
+ 
+
+
+    public fondleTarget getFondelTarget()
+    {
+        if (towel)
+        {
+            return towel;
+        }
+        else
+            return slong;
+    }
+    
+    
+    public void equipTowel(fondleTarget newTowel)
+    {
+        towel = newTowel;
     }
 }
