@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class HumanoidEnemy : BaseEnemy
+public abstract class HumanoidEnemy : BaseEnemy
 {
+    [HideInInspector]
+    public NavMeshAgent NavMeshAgent;
+    [HideInInspector]
+    public GameObject Player;
+
     public float MaxMoveSpeed
     {
         get
@@ -16,6 +22,17 @@ public class HumanoidEnemy : BaseEnemy
         }
     }
 
+    [SerializeField]
     private float _maxMoveSpeed;
 
+    public virtual void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    public float GetDistanceToPlayer()
+    {
+        return (transform.position - Player.transform.position).magnitude;
+    }
 }
