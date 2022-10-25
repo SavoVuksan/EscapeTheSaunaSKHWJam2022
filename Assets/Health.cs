@@ -51,7 +51,6 @@ public class Health : MonoBehaviour
             return;
         currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
 
-        Debug.Log("hit");
         updateVisuals();
         hitEvent.Invoke();
 
