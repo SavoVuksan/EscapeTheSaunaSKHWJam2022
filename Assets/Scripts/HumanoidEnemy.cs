@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanoidEnemy : BaseEnemy
+public abstract class HumanoidEnemy : BaseEnemy
 {
     public float MaxMoveSpeed
     {

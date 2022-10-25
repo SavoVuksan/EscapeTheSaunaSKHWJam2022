@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8634660948946640489}
   - component: {fileID: 5465312499983514659}
+  - component: {fileID: 6596528467979543663}
   m_Layer: 0
   m_Name: TheCreep
   m_TagString: Untagged
@@ -47,6 +48,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 2
   _maxMoveSpeed: 2
+  MoveActivationRadiusToPlayer: 20
+  AttackRadius: 3
+  NavMeshAgent: {fileID: 0}
+  Player: {fileID: 0}
+--- !u!195 &6596528467979543663
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703479656237250516}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 3
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &9177980760450005446
 GameObject:
   m_ObjectHideFlags: 0
