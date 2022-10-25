@@ -49,7 +49,7 @@ MonoBehaviour:
   _maxHealth: 2
   _maxMoveSpeed: 2
   MoveActivationRadiusToPlayer: 20
-  AttackRadius: 3
+  AttackRadius: 3.5
   NavMeshAgent: {fileID: 0}
   Player: {fileID: 0}
 --- !u!195 &6596528467979543663
