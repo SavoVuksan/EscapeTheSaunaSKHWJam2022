@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: KetchupUnlit
+  m_Name: JizzMaterial
   m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -60,8 +60,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_35c2df2a170c43d8842ba69eb719f3dd: {r: 1, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 0.9245283, g: 0.22153787, b: 0.22153787, a: 1}
-    - _Color: {r: 0.9245283, g: 0.22153783, b: 0.22153783, a: 1}
+    - _BaseColor: {r: 0.9056604, g: 0.9015218, b: 0.756141, a: 1}
+    - _Color: {r: 0.9056604, g: 0.9015218, b: 0.75614095, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2187746574575279498
 MonoBehaviour:
