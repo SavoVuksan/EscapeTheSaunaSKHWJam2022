@@ -37,7 +37,7 @@ public class Enemy_HandBrain : StateManager
         base.Update();
 
 
-        searchForPlayer(out player);
+     //   searchForPlayer(out player);
 
 
         leaveTrail();
