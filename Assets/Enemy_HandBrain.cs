@@ -7,14 +7,18 @@ public class Enemy_HandBrain : StateManager
     public Idle idleState = new Idle();
     public chase chaseState = new chase();
 
-    public Transform player;
-
+    public Player player;
+    public fondleTarget myTarget;
     public Transform hand;
     public float _speed = 1;
     public float _rotationSpeed = 1;
 
     public float retriveSpeed;
     public float retriveRotationSpeed;
+    private bool updateTarget = true;
+    public bool retreaving;
+    private GameObject stealObj;
+    private List<Vector3> myPoints = new List<Vector3>();
     public void OnEnable()
     {
         Init();
@@ -37,13 +41,16 @@ public class Enemy_HandBrain : StateManager
         base.Update();
 
 
-     //   searchForPlayer(out player);
+        //   searchForPlayer(out player);
 
 
         leaveTrail();
+
         if (!retreaving)
         {
-            var leadTimePercentage = Mathf.InverseLerp(_minDistancePredict, _maxDistancePredict, Vector3.Distance(hand.position, player.position));
+            if(updateTarget)
+            myTarget = player.getFondelTarget();
+            var leadTimePercentage = Mathf.InverseLerp(_minDistancePredict, _maxDistancePredict, Vector3.Distance(hand.position, myTarget.transform.position));
 
             PredictMovement(leadTimePercentage);
 
@@ -52,34 +59,28 @@ public class Enemy_HandBrain : StateManager
 
         }
         else
+        {
+            updateTarget = true;
             retrieve();
-
+        }
     }
-    public bool retreaving;
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
 
     }
-    List<Vector3> myPoints = new List<Vector3>();
-
-
-    public void updateTrail()
-    {
-        if (myPoints != null)
-        {//myPoints != null
-            lineRenderer.SetVertexCount(myPoints.Count);
-            for (int i = 0; i < myPoints.Count; i++)
-            {
-                lineRenderer.SetPosition(i, myPoints[i]);
-            }
-        }
-    }
     public void chasePlayer()
     {
-        if (Vector3.Distance(hand.position, player.transform.position) < 1)
-            retreaving = true;
+        if(lingering)
+        {
+            return;
+        }
+        if (Vector3.Distance(hand.position, myTarget.transform.position) < reachRadius)
+        {
+            StartCoroutine(linger());
+            lingering = true;
+        }
 
 
         var step = _speed * Time.deltaTime;
@@ -91,47 +92,41 @@ public class Enemy_HandBrain : StateManager
         var rotation = Quaternion.LookRotation(heading);
         hand.rotation = Quaternion.RotateTowards(hand.rotation, rotation, _rotationSpeed * Time.deltaTime);
     }
-    [Header("PREDICTION")]
-    [SerializeField] private float _maxDistancePredict = 100;
-    [SerializeField] private float _minDistancePredict = 5;
-    [SerializeField] private float _maxTimePrediction = 5;
-    private Vector3 _standardPrediction, _deviatedPrediction;
 
-    [Header("DEVIATION")]
-    [SerializeField] private float _deviationAmountX = 50;
-    [SerializeField] private float _deviationAmountY = 50;
-    [SerializeField] private float _deviationSpeedX = 2;
-    [SerializeField] private float _deviationSpeedY = 2;
-    private void PredictMovement(float leadTimePercentage)
+    [Header("hand Linger")]
+    public float lingerTime = 3;
+    public float reachRadius = 0.5f;
+    private bool lingering;
+
+    public void hit()
     {
-        var predictionTime = Mathf.Lerp(0, _maxTimePrediction, leadTimePercentage);
+        lingering = false;
+        retreaving= true;
 
-        _standardPrediction = player.transform.position; // rb.velocity* predictionTime;
     }
-
-    private void AddDeviation(float leadTimePercentage)
+    private IEnumerator linger()
     {
-        var deviationX = new Vector3(Mathf.Cos(Time.time * _deviationSpeedX), 0, 0);
-        var deviationY = new Vector3(0, Mathf.Cos(Time.time * _deviationSpeedY), 0);
+        //queue sound
 
-        var predictionOffsetX = hand.TransformDirection(deviationX) * _deviationAmountX * leadTimePercentage;
-        var predictionOffsetY = hand.TransformDirection(deviationY) * _deviationAmountY * leadTimePercentage;
+        yield return new WaitForSeconds(lingerTime);
+        if (Vector3.Distance(hand.position, myTarget.transform.position) > reachRadius +1)
+        {
+            lingering = false;
+            yield break;
+        }
 
-        _deviatedPrediction = _standardPrediction + predictionOffsetX + predictionOffsetY;
-    }
+        retreaving = true;
+        //fondle
+        if (myTarget.stealObject(out stealObj))
+        {
+            pickUpObject(true);
 
-
-    public bool searchForPlayer(out Transform player)
-    {
-        var players = Physics.OverlapSphere(hand.position, 101, playerLayer);
-
-        //closest player
-        if (players.Length > 0)
-            player = players[0].transform;
+        }
         else
-            player = null;
+            stealObj = null;
 
-        return player != null ? true : false;
+        myTarget.startFondle();
+        myTarget.stopFondle();
     }
 
     public void retrieve()
@@ -141,6 +136,12 @@ public class Enemy_HandBrain : StateManager
         {
             retreaving = false;
             hand.position = transform.position;
+
+
+            if(stealObj)
+            {
+                pickUpObject(false);
+            }
             return;
         }
         var target = myPoints[addedPoints - 1];
@@ -154,6 +155,55 @@ public class Enemy_HandBrain : StateManager
         hand.rotation = Quaternion.RotateTowards(hand.rotation, rotation, retriveRotationSpeed * 3 * Time.deltaTime);
 
         pickUpTrail();
+    }
+
+    #region interact
+    public bool searchForPlayer(out Transform player)
+    {
+        var players = Physics.OverlapSphere(hand.position, 101, playerLayer);
+
+        //closest player
+        if (players.Length > 0)
+            player = players[0].transform;
+        else
+            player = null;
+
+        return player != null ? true : false;
+    }
+
+
+    public void pickUpObject(bool bo)
+    {
+        var rb = stealObj.GetComponent<Rigidbody>();
+
+
+        if (!bo)
+        {
+            stealObj.transform.parent = null;
+            rb.isKinematic = false;
+            stealObj = null;
+        }
+        else
+        {
+            stealObj.transform.position = hand.transform.position;
+            stealObj.transform.parent = hand;
+            rb.isKinematic = true;
+
+        }
+    }
+    #endregion
+
+    #region trail
+    public void updateTrail()
+    {
+        if (myPoints != null)
+        {//myPoints != null
+            lineRenderer.SetVertexCount(myPoints.Count);
+            for (int i = 0; i < myPoints.Count; i++)
+            {
+                lineRenderer.SetPosition(i, myPoints[i]);
+            }
+        }
     }
 
     public void pickUpTrail()
@@ -191,7 +241,42 @@ public class Enemy_HandBrain : StateManager
 
         }
     }
+    #endregion
+
+    #region diviation/sway
+    [Header("PREDICTION")]
+    [SerializeField] private float _maxDistancePredict = 100;
+    [SerializeField] private float _minDistancePredict = 5;
+    [SerializeField] private float _maxTimePrediction = 5;
+    private Vector3 _standardPrediction, _deviatedPrediction;
+
+    [Header("DEVIATION")]
+    [SerializeField] private float _deviationAmountX = 50;
+    [SerializeField] private float _deviationAmountY = 50;
+    [SerializeField] private float _deviationSpeedX = 2;
+    [SerializeField] private float _deviationSpeedY = 2;
+    private void PredictMovement(float leadTimePercentage)
+    {
+        var predictionTime = Mathf.Lerp(0, _maxTimePrediction, leadTimePercentage);
+
+        _standardPrediction = myTarget.transform.position; // rb.velocity* predictionTime;
+    }
+
+    private void AddDeviation(float leadTimePercentage)
+    {
+        var deviationX = new Vector3(Mathf.Cos(Time.time * _deviationSpeedX), 0, 0);
+        var deviationY = new Vector3(0, Mathf.Cos(Time.time * _deviationSpeedY), 0);
+
+        var predictionOffsetX = hand.TransformDirection(deviationX) * _deviationAmountX * leadTimePercentage;
+        var predictionOffsetY = hand.TransformDirection(deviationY) * _deviationAmountY * leadTimePercentage;
+
+        _deviatedPrediction = _standardPrediction + predictionOffsetX + predictionOffsetY;
+    }
+    #endregion
+
 }
+
+
 
 #region states
 
@@ -259,7 +344,7 @@ public class chase : IState
         Ctx.hand.position = Vector3.MoveTowards(Ctx.hand.position, Ctx.hand.position + Ctx.hand.forward, step);
 
 
-        var heading = Ctx.player.position - Ctx.hand.position;
+        var heading = Ctx.player.transform.position - Ctx.hand.position;
 
         var rotation = Quaternion.LookRotation(heading);
         Ctx.hand.rotation = Quaternion.RotateTowards(Ctx.hand.rotation, rotation, Ctx._rotationSpeed * Time.deltaTime);
