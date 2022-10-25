@@ -16,6 +16,7 @@ public class HumanoidEnemy : BaseEnemy
         }
     }
 
+    [SerializeField]
     private float _maxMoveSpeed;
 
 }

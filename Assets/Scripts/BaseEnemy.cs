@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BaseEnemy : MonoBehaviour
 {
     internal float _currentHealth;
+    [SerializeField]
     internal float _maxHealth;
 
     public float CurrentHealth
