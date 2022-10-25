@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class CollisionSounds : MonoBehaviour
 {
+
     public enum materialTypes
     {
         Wood,
@@ -27,6 +28,11 @@ public class CollisionSounds : MonoBehaviour
 
     public materialTypes materialType;
     public int audioPriority;
+
+    [Space(2)]
+
+    public GameObject smackinParticles;
+
     //public float audioVolume;
     private AudioHandler audioHandler;
     private List<string> availableSounds = new List<string>();
@@ -66,6 +72,9 @@ public class CollisionSounds : MonoBehaviour
             PlayCollisionSound("DefaultSFX", collision);
         }
 
+
+        float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+
     }
 
     void PlayCollisionSound (string sound, Collision collision)
@@ -77,7 +86,18 @@ public class CollisionSounds : MonoBehaviour
         {
             string soundName = availableSounds.Contains(sound) ? sound : "DefaultSFX";
             audioHandler.Play(soundName, soundMultiplier);
+
+            if (smackinParticles)
+            {
+                GameObject _smackinParticles = Instantiate(smackinParticles, collision.GetContact(0).point, Quaternion.identity);
+            }
+
+
         }
     }
+
+
+
+
 
 }
