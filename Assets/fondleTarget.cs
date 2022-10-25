@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class fondleTarget : MonoBehaviour
 {
-    public UnityAction startFondelEvent;
-    public UnityAction StopFondelEvent;
+    public UnityEvent startFondelEvent;
+    public UnityEvent StopFondelEvent;
 
     public virtual void startFondle()
     {
@@ -17,7 +17,12 @@ public class fondleTarget : MonoBehaviour
     public virtual void stopFondle()
     {
         StopFondelEvent.Invoke();
-
     }
 
+    public bool stealAble = false;
+    public virtual bool stealObject(out GameObject obj)
+    {
+        obj = this.gameObject;
+        return stealAble;
+    }
 }

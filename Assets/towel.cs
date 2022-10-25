@@ -24,13 +24,14 @@ public class towel : MonoBehaviour
         _player.equipTowel(towelTarget);
         swordify(false);
     }
+    public void unequipInSlot()
+    {
+
+        _player.equipTowel(null);
+    }
     public void dropTowel()
     {
         swordify(true);
         //released but not equipped
-
-
-
-
     }
 }
