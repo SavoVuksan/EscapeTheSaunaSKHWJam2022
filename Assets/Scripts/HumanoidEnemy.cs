@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public abstract class HumanoidEnemy : BaseEnemy
 {
+    [SerializeField]
+    public bool DrawGizmos = true;
     [HideInInspector]
     public NavMeshAgent NavMeshAgent;
     [HideInInspector]
