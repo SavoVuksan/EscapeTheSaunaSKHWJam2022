@@ -6,16 +6,16 @@ public class ShyGuy : HumanoidEnemy
 {
     [SerializeField]
     public float AttackRadius;
-    private StateManager _moveStateManager;
+    private StateMachine _moveStateManager;
     private Camera _playerCamera;
 
     public override void Start()
     {
         base.Start();
         _playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        _moveStateManager = gameObject.AddComponent<StateManager>();
+        _moveStateManager = gameObject.AddComponent<StateMachine>();
         _moveStateManager.Holder = this;
-        _moveStateManager.setNewState(new ShyGuy.IdleState());
+        _moveStateManager.SetNewState(new ShyGuy.IdleState());
     }
 
     void Update()
@@ -24,9 +24,10 @@ public class ShyGuy : HumanoidEnemy
         {
             if (!(_moveStateManager.CurrentState is ShyGuy.MoveState))
             {
-                _moveStateManager.setNewState(new ShyGuy.MoveState());
+                _moveStateManager.SetNewState(new ShyGuy.MoveState());
             }
-            if(GetDistanceToPlayer() < AttackRadius){
+            if (GetDistanceToPlayer() < AttackRadius)
+            {
                 // Add code for attack handling.
             }
         }
@@ -34,7 +35,7 @@ public class ShyGuy : HumanoidEnemy
         {
             if (!(_moveStateManager.CurrentState is ShyGuy.IdleState))
             {
-                _moveStateManager.setNewState(new ShyGuy.IdleState());
+                _moveStateManager.SetNewState(new ShyGuy.IdleState());
             }
         }
     }
@@ -54,35 +55,35 @@ public class ShyGuy : HumanoidEnemy
         return true;
     }
 
-    
+
 
     private class IdleState : HumanoidState
     {
-        public override void exitState(StateManager manager)
+        public override void ExitState(StateMachine stateMachine)
+        {
+        }
+        public override void FixedUpdateState(StateMachine stateMachine)
         {
         }
 
-        public override void FixedUpdateState(StateManager manager)
-        {
-        }
 
-        public override void updateState(StateManager manager)
+        public override void UpdateState(StateMachine stateMachine)
         {
         }
     }
 
     private class MoveState : HumanoidState
     {
-        public override void exitState(StateManager manager)
+        public override void ExitState(StateMachine stateMachine)
         {
             Self.NavMeshAgent.SetDestination(Self.transform.position);
         }
 
-        public override void FixedUpdateState(StateManager manager)
+        public override void FixedUpdateState(StateMachine stateMachine)
         {
         }
 
-        public override void updateState(StateManager manager)
+        public override void UpdateState(StateMachine stateMachine)
         {
             Self.NavMeshAgent.SetDestination(Self.Player.transform.position);
         }

@@ -9,14 +9,14 @@ public class Creep : HumanoidEnemy
     public float MoveActivationRadiusToPlayer;
     [SerializeField]
     public float AttackRadius;
-    private StateManager _moveStateMachine;
+    private StateMachine _moveStateMachine;
     private AttackState _attackState;
     public override void Start()
     {
         base.Start();
-        _moveStateMachine = gameObject.AddComponent<StateManager>();
+        _moveStateMachine = gameObject.AddComponent<StateMachine>();
         _moveStateMachine.Holder = this;
-        _moveStateMachine.setNewState(new IdleState());
+        _moveStateMachine.SetNewState(new IdleState());
     }
 
     void Update()
@@ -24,13 +24,13 @@ public class Creep : HumanoidEnemy
         if (GetDistanceToPlayer() < AttackRadius && _attackState == null)
         {
             _attackState = new AttackState();
-            _attackState.enterState(null);
+            _attackState.EnterState(null);
         }
     }
 
     public override void OnHit(float damage)
     {
-        _moveStateMachine.setNewState(new HitState());
+        _moveStateMachine.SetNewState(new HitState());
     }
     public void OnDrawGizmos()
     {
@@ -44,24 +44,24 @@ public class Creep : HumanoidEnemy
 
     private class IdleState : HumanoidState
     {
-        public override void enterState(StateManager manager)
+        public override void EnterState(StateMachine stateMachine)
         {
-            base.enterState(manager);
+            base.EnterState(stateMachine);
         }
 
-        public override void exitState(StateManager manager)
+        public override void ExitState(StateMachine stateMachine)
         {
         }
 
-        public override void FixedUpdateState(StateManager manager)
+        public override void FixedUpdateState(StateMachine stateMachine)
         {
             if ((Self as Creep).GetDistanceToPlayer() < (Self as Creep).MoveActivationRadiusToPlayer)
             {
-                manager.setNewState(new MoveState());
+                stateMachine.SetNewState(new MoveState());
             }
         }
 
-        public override void updateState(StateManager manager)
+        public override void UpdateState(StateMachine stateMachine)
         {
         }
 
@@ -70,41 +70,41 @@ public class Creep : HumanoidEnemy
 
     private class MoveState : HumanoidState
     {
-        public override void enterState(StateManager manager)
+        public override void EnterState(StateMachine stateMachine)
         {
-            base.enterState(manager);
+            base.EnterState(stateMachine);
         }
-
-        public override void exitState(StateManager manager)
+        public override void ExitState(StateMachine stateMachine)
         {
         }
-
-        public override void FixedUpdateState(StateManager manager)
+        public override void FixedUpdateState(StateMachine stateMachine)
         {
             (Self as Creep).NavMeshAgent.SetDestination((Self as Creep).Player.transform.position);
         }
-
-        public override void updateState(StateManager manager)
+        public override void UpdateState(StateMachine stateMachine)
         {
         }
     }
 
     private class HitState : HumanoidState
     {
-        public override void enterState(StateManager manager)
+        public override void EnterState(StateMachine stateMachine)
         {
-            base.enterState(manager);
+            base.EnterState(stateMachine);
         }
 
-        public override void exitState(StateManager manager)
-        {
-        }
 
-        public override void FixedUpdateState(StateManager manager)
+        public override void ExitState(StateMachine stateMachine)
         {
         }
 
-        public override void updateState(StateManager manager)
+
+        public override void FixedUpdateState(StateMachine stateMachine)
+        {
+        }
+
+
+        public override void UpdateState(StateMachine stateMachine)
         {
         }
     }
@@ -112,22 +112,22 @@ public class Creep : HumanoidEnemy
     private class AttackState : HumanoidState
     {
 
-        public override void enterState(StateManager manager)
+        public override void EnterState(StateMachine stateMachine)
         {
-            base.enterState(manager);
+            base.EnterState(stateMachine);
             // Add logic for towel grabbing and schlong tapping
             PrintUtil.Instance.Print("Play attack anim!");
         }
 
-        public override void exitState(StateManager manager)
+        public override void ExitState(StateMachine stateMachine)
         {
         }
 
-        public override void FixedUpdateState(StateManager manager)
+        public override void FixedUpdateState(StateMachine stateMachine)
         {
         }
 
-        public override void updateState(StateManager manager)
+        public override void UpdateState(StateMachine stateMachine)
         {
         }
     }
