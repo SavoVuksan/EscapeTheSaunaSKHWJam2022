@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseEnemy : MonoBehaviour
+public abstract class BaseEnemy : MonoBehaviour, IHitable
 {
     internal float _currentHealth;
+    [SerializeField]
     internal float _maxHealth;
 
     public float CurrentHealth
@@ -28,4 +29,5 @@ public abstract class BaseEnemy : MonoBehaviour
         }
     }
 
+    public abstract void OnHit(float damage);
 }
