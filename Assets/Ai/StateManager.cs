@@ -8,46 +8,34 @@ public class StateManager : MonoBehaviour
     [Header("State Machine")]
     [SerializeField]
     private string currentStateName;
-    public IState CurrentState;
+    private IState currentState;
 
-    private object _holder;
+
 
     [Header("general")]
     public LayerMask playerLayer;
-
-    public object Holder{
-        get{
-            return _holder;
-        }
-        set{
-            _holder = value;
-        }
-    }
 
     public virtual void Awake()
     {
     }
     public virtual void Update()
     {
-
-        CurrentState?.updateState(this);
-
+        currentState.updateState(this);
     }
     public virtual void FixedUpdate()
     {
         //FSM 
-        CurrentState?.FixedUpdateState(this);
-
+        currentState.FixedUpdateState(this);
     }
 
     public void setNewState(IState newState)
     {
-        CurrentState?.exitState(this);
+        currentState?.exitState(this);
 
-        CurrentState = newState;
+        currentState = newState;
         currentStateName = newState.ToString();
 
-        CurrentState.enterState(this);
+        currentState.enterState(this);
     }
 
 }
