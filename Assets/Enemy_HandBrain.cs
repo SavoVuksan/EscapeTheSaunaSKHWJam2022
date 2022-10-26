@@ -94,7 +94,7 @@ public class Enemy_HandBrain : StateManager
     }
 
     [Header("hand Linger")]
-    public float lingerTime = 3;
+    public float lingerTime = 2;
     public float reachRadius = 0.5f;
     private bool lingering;
 
@@ -116,6 +116,7 @@ public class Enemy_HandBrain : StateManager
         }
 
         retreaving = true;
+        lingering = false;
         //fondle
         if (myTarget.stealObject(out stealObj))
         {
