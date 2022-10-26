@@ -486,6 +486,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Masochist
       objectReference: {fileID: 0}
+    - target: {fileID: 7771785201573395436, guid: dbe06d17547c40242b417a0be7f2d9e2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ada0ccd82acbdb84d97d6a4dc4472e51, type: 2}
     - target: {fileID: 8596547436657059997, guid: dbe06d17547c40242b417a0be7f2d9e2,
         type: 3}
       propertyPath: m_StoppingDistance
@@ -1517,7 +1522,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2031da4b59c1e8543b1b0c963c957da0, type: 2}
+  - {fileID: 2100000, guid: 266de06368f29d8438b1e01f8cb1f435, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1794,7 +1799,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d43b8198716993645a617987d549be20, type: 2}
+  - {fileID: 2100000, guid: 37407864ee71d1f49823fe660877e01d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
