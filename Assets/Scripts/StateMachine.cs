@@ -23,12 +23,12 @@ public class StateMachine : MonoBehaviour
 
     public virtual void Update()
     {
-        _currentState.UpdateState(this);
+        _currentState?.UpdateState(this);
     }
     public virtual void FixedUpdate()
     {
         //FSM 
-        _currentState.FixedUpdateState(this);
+        _currentState?.FixedUpdateState(this);
     }
 
     public void SetNewState(IStateSavo newState)

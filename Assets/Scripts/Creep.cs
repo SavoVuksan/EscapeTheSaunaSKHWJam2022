@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using HurricaneVR.Framework.Core;
 
 public class Creep : HumanoidEnemy
 {
@@ -10,6 +11,7 @@ public class Creep : HumanoidEnemy
     [SerializeField]
     public float AttackRadius;
     private StateMachine _moveStateMachine;
+    private StateMachine _attackStateMachine;
     private AttackState _attackState;
     public override void Start()
     {
@@ -17,6 +19,9 @@ public class Creep : HumanoidEnemy
         _moveStateMachine = gameObject.AddComponent<StateMachine>();
         _moveStateMachine.Holder = this;
         _moveStateMachine.SetNewState(new IdleState());
+
+        _attackStateMachine = gameObject.AddComponent<StateMachine>();
+        _attackStateMachine.Holder = this;
     }
 
     void Update()
@@ -24,7 +29,7 @@ public class Creep : HumanoidEnemy
         if (GetDistanceToPlayer() < AttackRadius && _attackState == null)
         {
             _attackState = new AttackState();
-            _attackState.EnterState(null);
+            _attackStateMachine.SetNewState(_attackState);
         }
     }
 
@@ -115,10 +120,34 @@ public class Creep : HumanoidEnemy
         public override void EnterState(StateMachine stateMachine)
         {
             base.EnterState(stateMachine);
+            if(GameManager.Instance.hasTowel){
+                GameManager.Instance.WaistSocket.ForceRelease();
+                GameManager.Instance.TowerSword.transform.parent = stateMachine.Holder.transform;
+
+                
+            }else{
+                GameManager.Instance.LoseGame();
+            }
+
+            stateMachine.SetNewState(new LeaveState());
             // Add logic for towel grabbing and schlong tapping
-            PrintUtil.Instance.Print("Play attack anim!");
         }
 
+        public override void ExitState(StateMachine stateMachine)
+        {
+        }
+
+        public override void FixedUpdateState(StateMachine stateMachine)
+        {
+        }
+
+        public override void UpdateState(StateMachine stateMachine)
+        {
+        }
+    }
+
+    private class LeaveState : HumanoidState
+    {
         public override void ExitState(StateMachine stateMachine)
         {
         }
