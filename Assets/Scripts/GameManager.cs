@@ -1,3 +1,4 @@
+using HurricaneVR.Framework.Core.Grabbers;
 using HurricaneVR.Framework.Core.Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +8,13 @@ public class GameManager : Singleton<GameManager>
 {
     public HVRCanvasFade winCanvas;
     public HVRCanvasFade loseCanvas;
+    public GameObject TowerSword;
+    public HVRSocket WaistSocket;
 
+    [Header("DEBUG")]
+    public bool hasTowel = true;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void StartGame()
     {
@@ -47,4 +48,13 @@ public class GameManager : Singleton<GameManager>
         winCanvas.Fade(1, 1);
     }
 
+    public void LostTowel()
+    {
+        hasTowel = false;
+    }
+
+    public void RecoverTower()
+    {
+        hasTowel = true;
+    }
 }
