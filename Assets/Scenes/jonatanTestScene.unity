@@ -2530,6 +2530,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9178b2f553edcb449b69e0ef24aa9439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startFondelEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopFondelEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  stealAble: 0
 --- !u!1 &1067584847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,6 +2604,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slong: {fileID: 1059871961}
   towel: {fileID: 2071364453}
+  socket: {fileID: 0}
+  grabbable: {fileID: 0}
+  currentHP: 2
+  TowelBuffer: 1
 --- !u!135 &1074087415
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2895,12 +2906,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   player: {fileID: 1074087418}
+  myTarget: {fileID: 0}
   hand: {fileID: 983658277}
   _speed: 5
   _rotationSpeed: 300
   retriveSpeed: 32
   retriveRotationSpeed: 300
   retreaving: 0
+  lingerTime: 2
+  reachRadius: 0.5
+  lineRenderer: {fileID: 983658278}
+  minVertaxDistance: 0.2
   _maxDistancePredict: 100
   _minDistancePredict: 1
   _maxTimePrediction: 5
@@ -2908,8 +2924,6 @@ MonoBehaviour:
   _deviationAmountY: 50
   _deviationSpeedX: 2
   _deviationSpeedY: 2
-  lineRenderer: {fileID: 983658278}
-  minVertaxDistance: 0.2
 --- !u!114 &1179318832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4243,6 +4257,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9178b2f553edcb449b69e0ef24aa9439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startFondelEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopFondelEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  stealAble: 0
 --- !u!54 &2071364454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6130,12 +6151,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   player: {fileID: 0}
+  myTarget: {fileID: 0}
   hand: {fileID: 0}
   _speed: 1
   _rotationSpeed: 1
   retriveSpeed: 0
   retriveRotationSpeed: 0
   retreaving: 0
+  lingerTime: 2
+  reachRadius: 0.5
+  lineRenderer: {fileID: 0}
+  minVertaxDistance: 0
   _maxDistancePredict: 100
   _minDistancePredict: 5
   _maxTimePrediction: 5
@@ -6143,8 +6169,6 @@ MonoBehaviour:
   _deviationAmountY: 50
   _deviationSpeedX: 2
   _deviationSpeedY: 2
-  lineRenderer: {fileID: 0}
-  minVertaxDistance: 0
 --- !u!120 &9083411807483211264
 LineRenderer:
   m_ObjectHideFlags: 0

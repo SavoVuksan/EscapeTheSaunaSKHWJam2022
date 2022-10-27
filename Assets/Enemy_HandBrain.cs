@@ -68,7 +68,7 @@ public class Enemy_HandBrain : StateManager
     {
         base.FixedUpdate();
 
-
+        Invoke("chasePlayer", 1);
     }
     public void chasePlayer()
     {
