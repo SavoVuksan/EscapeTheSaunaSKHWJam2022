@@ -13,6 +13,7 @@ public class Spoon : MonoBehaviour
     AudioHandler audioHandler;
     HVRGrabbable grabbable;
     public UnityEvent SteamStart;
+    public GameObject steamParticles;
 
     private void Start()
     {
@@ -43,9 +44,17 @@ public class Spoon : MonoBehaviour
         audioHandler.Play("SteamSound");
         spoonWatered = false;
         spoonWaterMeshRenderer.enabled = false;
+        steamParticles.SetActive(true);
+
 
         grabbable.ForceRelease();
         grabbable.enabled = false;
+
+        GameManager.Instance.StartGame();        
+
         //You can put the stuff here or in the unity editor
     }
+
+
+
 }
