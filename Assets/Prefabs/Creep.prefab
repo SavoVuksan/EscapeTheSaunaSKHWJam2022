@@ -51,10 +51,27 @@ MonoBehaviour:
   DrawGizmos: 1
   NavMeshAgent: {fileID: 0}
   Player: {fileID: 0}
+  SoundTimer:
+    Duration: 3.5
+    AutoStart: 1
+    OneShot: 0
+    TimeLeft: 0
+    TimeOut: 0
   _maxMoveSpeed: 2
   MoveActivationRadiusToPlayer: 20
-  AttackRadius: 3.5
-  SoundCooldown: 5
+  AttackRadius: 1.69
+  AttackTimer:
+    Duration: 1.5
+    AutoStart: 0
+    OneShot: 1
+    TimeLeft: 0
+    TimeOut: 0
+  TowelDropTimer:
+    Duration: 4
+    AutoStart: 0
+    OneShot: 0
+    TimeLeft: 0
+    TimeOut: 0
 --- !u!195 &6596528467979543663
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -90,9 +107,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundType: 0
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 24300002, guid: 1c0c5acd218ce4a468512bc8e23ed422, type: 2}
   playOnStart: 
-  sounds: []
+  sounds:
+  - name: Grab
+    clip: {fileID: 8300000, guid: f81a56bc0e8dcae4c94d866812739947, type: 3}
+    volume: 1
+    volumeVariance: 0.1
+    pitch: 1
+    pitchVariance: 0.1
+    dopplerLevel: 0
+    spread: 0
+    spatialBlend: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
   soundGroups:
   - name: Grunting
     clips:

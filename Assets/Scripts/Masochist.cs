@@ -9,21 +9,19 @@ public class Masochist : HumanoidEnemy
     [SerializeField]
     public float PlayerReachRadius;
     [SerializeField]
+    public float PlayerReachMarginPercent = 0.1f;
+    [SerializeField]
     public float DespawnRadius;
     [SerializeField]
-    public float BoredTime = 10;
+    public Timer BoredTimer;
     [SerializeField]
-    public float DirtyTalkTime = 20;
+    public Timer DirtyTalkTimer;
     [SerializeField]
-    public float DirtyTalkSilenceTime = 2;
-
+    public Timer DirtyTalkSilenceTimer;
 
     private StateMachine _moveStateMachine;
     private bool _gotHit;
     private bool _reachedPlayer;
-    private float _boredTimer;
-    private float _dirtyTalkTimer;
-    private float _dirtyTalkSilenceTimer;
     private Coroutine _currentDirtyTalkCoroutine;
     private AudioHandler _audioHandler;
 
@@ -42,31 +40,44 @@ public class Masochist : HumanoidEnemy
     {
         base.Start();
         _gotHit = false;
-        _boredTimer = BoredTime;
-        _dirtyTalkTimer = DirtyTalkTime;
-        _dirtyTalkSilenceTimer = 0;
         _moveStateMachine = gameObject.AddComponent<StateMachine>();
         _moveStateMachine.Holder = this;
         _moveStateMachine.SetNewState(new Masochist.IdleState());
         _audioHandler = GetComponent<AudioHandler>();
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        BoredTimer.Init(this);
+        DirtyTalkTimer.Init(this);
+        DirtyTalkSilenceTimer.Init(this);
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+
+    }
+
     public void Update()
     {
-        if (_gotHit && _boredTimer > 0 && _currentDirtyTalkCoroutine == null)
+        if (_gotHit && !BoredTimer.TimeOut && _currentDirtyTalkCoroutine == null)
         {
             //Start dirty talk coroutine.
             _currentDirtyTalkCoroutine = StartCoroutine(nameof(DirtyTalk));
         }
-        if (!_gotHit && _boredTimer <= 0 && !(_moveStateMachine.CurrentState is LeaveState))
+        if (!_gotHit && BoredTimer.TimeOut && !(_moveStateMachine.CurrentState is LeaveState))
         {
             // Go away
             _moveStateMachine.SetNewState(new LeaveState());
         }
-        if (_reachedPlayer)
+        if (_reachedPlayer && !BoredTimer.Running)
         {
-            _boredTimer -= Time.deltaTime;
-            _boredTimer = Mathf.Max(_boredTimer, 0);
+            BoredTimer.StartTimer();
+        }
+        if(!_reachedPlayer && BoredTimer.Running){
+            BoredTimer.StopTimer();
         }
     }
 
@@ -77,19 +88,19 @@ public class Masochist : HumanoidEnemy
 
     private IEnumerator DirtyTalk()
     {
-        while (_dirtyTalkTimer > 0)
+        DirtyTalkTimer.StartTimer();
+        DirtyTalkSilenceTimer.TimeLeft = 0;
+        while (DirtyTalkTimer.TimeLeft > 0)
         {
-            if (_dirtyTalkSilenceTimer <= 0)
+            if (DirtyTalkSilenceTimer.TimeLeft <= 0)
             {
-                print("Insert dirty talk");
                 _audioHandler.PlayRandomFromGroup("Dirtytalk");
-                _dirtyTalkSilenceTimer = DirtyTalkSilenceTime;
+                DirtyTalkSilenceTimer.ResetTimer();
             }
-            _dirtyTalkSilenceTimer -= Time.deltaTime;
-            _dirtyTalkTimer -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         // Start Go Away behaviour
+        _moveStateMachine.SetNewState(new LeaveState());
         yield return null;
     }
 
@@ -101,6 +112,8 @@ public class Masochist : HumanoidEnemy
             Gizmos.DrawWireSphere(transform.position, MoveActivationRadiusToPlayer);
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, PlayerReachRadius);
+            Gizmos.color = Color.gray;
+            Gizmos.DrawWireSphere(transform.position, PlayerReachRadius * ( 1 + PlayerReachMarginPercent));
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, DespawnRadius);
         }
@@ -136,7 +149,8 @@ public class Masochist : HumanoidEnemy
 
         public override void FixedUpdateState(StateMachine stateMachine)
         {
-            if ((Self as Masochist).GetDistanceToPlayer() < (Self as Masochist).PlayerReachRadius && !(Self as Masochist)._reachedPlayer)
+            if ((Self as Masochist).GetDistanceToPlayer() < (Self as Masochist).PlayerReachRadius * (1 + (Self as Masochist).PlayerReachMarginPercent)
+            && !(Self as Masochist)._reachedPlayer)
             {
                 (Self as Masochist).ReachedPlayer = true;
             }
@@ -163,6 +177,7 @@ public class Masochist : HumanoidEnemy
             if ((Self as Masochist).GetDistanceToPlayer() >= (Self as Masochist).DespawnRadius)
             {
                 // Despawn Masochist.
+                Destroy(Self.gameObject);
             }
         }
 

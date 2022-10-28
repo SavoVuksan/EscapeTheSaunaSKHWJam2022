@@ -11,7 +11,9 @@ public abstract class HumanoidEnemy : BaseEnemy
     public NavMeshAgent NavMeshAgent;
     [HideInInspector]
     public GameObject Player;
-
+    public Timer SoundTimer;
+    [SerializeField]
+    private float _maxMoveSpeed;
     public float MaxMoveSpeed
     {
         get
@@ -23,10 +25,6 @@ public abstract class HumanoidEnemy : BaseEnemy
             _maxMoveSpeed = value;
         }
     }
-
-    [SerializeField]
-    private float _maxMoveSpeed;
-
     public virtual void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -36,5 +34,13 @@ public abstract class HumanoidEnemy : BaseEnemy
     public float GetDistanceToPlayer()
     {
         return (transform.position - Player.transform.position).magnitude;
+    }
+
+    public virtual void OnEnable() {
+        SoundTimer.Init(this);
+    }
+
+    public virtual void OnDisable() {
+        
     }
 }
