@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public HVRSocket socket;
     public HVRGrabbable grabbable;
 
+    public bool IsTowelSwordEquipped = false;
+
     private void Start()
     {
       //  grabbable.Socketed.AddListener(JustSocketed)
