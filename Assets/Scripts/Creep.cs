@@ -11,12 +11,11 @@ public class Creep : HumanoidEnemy
     [SerializeField]
     public float AttackRadius;
     [SerializeField]
-    public float SoundCooldown = 5;
+    public Timer SoundTimer;
     private StateMachine _moveStateMachine;
     private StateMachine _attackStateMachine;
     private AttackState _attackState;
     private AudioHandler _audioHandler;
-    private float _soundCooldownTimer;
     public override void Start()
     {
         base.Start();
@@ -27,7 +26,19 @@ public class Creep : HumanoidEnemy
         _attackStateMachine = gameObject.AddComponent<StateMachine>();
         _audioHandler = GetComponent<AudioHandler>();
         _attackStateMachine.Holder = this;
-        _soundCooldownTimer = SoundCooldown;
+
+
+    }
+
+    private void OnEnable()
+    {
+        SoundTimer.Init(this);
+        SoundTimer.TimeOutEvent += PlaySound;
+    }
+
+    private void OnDisable()
+    {
+        SoundTimer.TimeOutEvent -= PlaySound;
     }
 
     void Update()
@@ -37,13 +48,6 @@ public class Creep : HumanoidEnemy
             _attackState = new AttackState();
             _attackStateMachine.SetNewState(_attackState);
         }
-
-        if(_soundCooldownTimer <= 0){
-            _audioHandler.PlayRandomFromGroup("Grunting");
-            _soundCooldownTimer = SoundCooldown;
-        }
-        _soundCooldownTimer -= Time.deltaTime;
-        _soundCooldownTimer = Mathf.Max(0, _soundCooldownTimer);
     }
 
     public override void OnHit(float damage)
@@ -58,6 +62,10 @@ public class Creep : HumanoidEnemy
         Gizmos.DrawWireSphere(transform.position, AttackRadius);
     }
 
+    private void PlaySound()
+    {
+        _audioHandler.PlayRandomFromGroup("Grunting");
+    }
 
 
     private class IdleState : HumanoidState
@@ -133,12 +141,15 @@ public class Creep : HumanoidEnemy
         public override void EnterState(StateMachine stateMachine)
         {
             base.EnterState(stateMachine);
-            if(GameManager.Instance.hasTowel){
+            if (GameManager.Instance.hasTowel)
+            {
                 GameManager.Instance.WaistSocket.ForceRelease();
                 GameManager.Instance.TowerSword.transform.parent = stateMachine.Holder.transform;
 
-                
-            }else{
+
+            }
+            else
+            {
                 GameManager.Instance.LoseGame();
             }
 
