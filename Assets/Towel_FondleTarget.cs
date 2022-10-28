@@ -15,16 +15,8 @@ public class Towel_FondleTarget : fondleTarget
 
     }
 
-    public towel _towel;
- 
-
-
     public override bool stealObject(out GameObject obj)
     {
-        _towel._player.socket.ForceRelease();
-        _towel.unequipInSlot();
-
-
         obj = this.gameObject;
         return stealAble;
     }

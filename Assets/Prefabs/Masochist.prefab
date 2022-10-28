@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 357311193298410735}
   - component: {fileID: 8596547436657059997}
   - component: {fileID: 605444491342339722}
+  - component: {fileID: 8743669585705056978}
   m_Layer: 0
   m_Name: Masochist
   m_TagString: Untagged
@@ -177,3 +178,56 @@ MonoBehaviour:
   BoredTime: 10
   DirtyTalkTime: 20
   DirtyTalkSilenceTime: 2
+--- !u!114 &8743669585705056978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2528396903491209137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10295d9086fec5643b4e689798ff55d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundType: 0
+  mixerGroup: {fileID: 0}
+  playOnStart: 
+  sounds:
+  - name: Dirtytalk1
+    clip: {fileID: 8300000, guid: 818c03ed917944b44aa122b7f3547ce6, type: 3}
+    volume: 0
+    volumeVariance: 0
+    pitch: 0
+    pitchVariance: 0
+    dopplerLevel: 0
+    spread: 0
+    spatialBlend: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  soundGroups:
+  - name: Dirtytalk
+    clips:
+    - {fileID: 8300000, guid: 818c03ed917944b44aa122b7f3547ce6, type: 3}
+    - {fileID: 8300000, guid: 8c43bef9cef1b1e4c88d96f44d4e4dda, type: 3}
+    - {fileID: 8300000, guid: f81a56bc0e8dcae4c94d866812739947, type: 3}
+    - {fileID: 8300000, guid: 5450d593f952b2046b396319cab0269b, type: 3}
+    - {fileID: 8300000, guid: c9b43da869960c244922aa71b7acef26, type: 3}
+    - {fileID: 8300000, guid: ab31ad747064e7d47967420cbf75cd72, type: 3}
+    - {fileID: 8300000, guid: e1626285c86fab445a4ed8c7f38f9098, type: 3}
+    - {fileID: 8300000, guid: 674c638473ca54841860e3772e9484ae, type: 3}
+    - {fileID: 8300000, guid: ba9f78ae0a1e720459954e9d097e6907, type: 3}
+    - {fileID: 8300000, guid: 4a63b0b772712c344aa19cb5998f8843, type: 3}
+    volume: 0.8
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0.1
+    dopplerLevel: 0
+    spread: 0
+    spatialBlend: 0.9
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  slowDownInfluence: 1
+  timeUntilAudioSourcesDestroyed: 2

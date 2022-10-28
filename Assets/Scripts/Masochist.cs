@@ -25,6 +25,7 @@ public class Masochist : HumanoidEnemy
     private float _dirtyTalkTimer;
     private float _dirtyTalkSilenceTimer;
     private Coroutine _currentDirtyTalkCoroutine;
+    private AudioHandler _audioHandler;
 
     public bool ReachedPlayer
     {
@@ -47,6 +48,7 @@ public class Masochist : HumanoidEnemy
         _moveStateMachine = gameObject.AddComponent<StateMachine>();
         _moveStateMachine.Holder = this;
         _moveStateMachine.SetNewState(new Masochist.IdleState());
+        _audioHandler = GetComponent<AudioHandler>();
     }
 
     public void Update()
@@ -80,6 +82,7 @@ public class Masochist : HumanoidEnemy
             if (_dirtyTalkSilenceTimer <= 0)
             {
                 print("Insert dirty talk");
+                _audioHandler.PlayRandomFromGroup("Dirtytalk");
                 _dirtyTalkSilenceTimer = DirtyTalkSilenceTime;
             }
             _dirtyTalkSilenceTimer -= Time.deltaTime;

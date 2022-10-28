@@ -5,7 +5,7 @@ using UnityEngine;
 public class raycastTester : MonoBehaviour
 {
     public Camera camera;
-    public towel target;
+    public Towel target;
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -14,14 +14,14 @@ public class raycastTester : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                var _towel = hit.transform.GetComponent<towel>();
+                var _towel = hit.transform.GetComponent<Towel>();
                 if (_towel)
                 {
                     target = _towel;
                     mZCoord = Camera.main.WorldToScreenPoint(target.transform.position).z;
                     mOffset = target.transform.position - GetMouseAsWorldPoint();
 
-                    target.swordify(true);
+                    //target.swordify(true);
                 }
             }
         }
@@ -36,7 +36,7 @@ public class raycastTester : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
-            target.swordify(false);
+            //target.swordify(false);
             target = null;
         }
     }
