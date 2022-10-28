@@ -44,7 +44,6 @@ public class Enemy_HandBrain : StateManager
         //   searchForPlayer(out player);
 
 
-        leaveTrail();
 
         if (!retreaving)
         {
@@ -72,7 +71,7 @@ public class Enemy_HandBrain : StateManager
     }
     public void chasePlayer()
     {
-        if(lingering)
+        if(lingering|| retreaving)
         {
             return;
         }
@@ -82,6 +81,7 @@ public class Enemy_HandBrain : StateManager
             lingering = true;
         }
 
+        leaveTrail();
 
         var step = _speed * Time.deltaTime;
         hand.position = Vector3.MoveTowards(hand.position, hand.position + hand.forward, step);
@@ -127,6 +127,8 @@ public class Enemy_HandBrain : StateManager
 
         myTarget.startFondle();
         myTarget.stopFondle();
+        lingering = false;
+
     }
 
     public void retrieve()
@@ -136,7 +138,11 @@ public class Enemy_HandBrain : StateManager
         {
             retreaving = false;
             hand.position = transform.position;
+            foreach (var item in handTilesSpawned)
+            {
+                item.SetActive(false);
 
+            }
 
             if(stealObj)
             {
@@ -194,17 +200,33 @@ public class Enemy_HandBrain : StateManager
     #endregion
 
     #region trail
+    public GameObject handTile;
+     public List<GameObject> handTilesSpawned = new List<GameObject>();
     public void updateTrail()
     {
-        if (myPoints != null)
-        {//myPoints != null
-            lineRenderer.SetVertexCount(myPoints.Count);
+        //myPoints != null
+         //  lineRenderer.SetVertexCount(myPoints.Count);
+            /* for (int i = 0; i < myPoints.Count; i++)
+             {
+                 lineRenderer.SetPosition(i, myPoints[i]);
+             }*/
+
             for (int i = 0; i < myPoints.Count; i++)
             {
-                lineRenderer.SetPosition(i, myPoints[i]);
+                var spawned = Instantiate(handTile, myPoints[i], handTile.transform.rotation);
+                spawned.transform.parent = transform;
+            spawned.transform.name = "handTile" + myPoints.Count;
+
             }
-        }
+        
     }
+    //check reuse
+    //spawn
+    //rotate
+
+
+    //remove
+
 
     public void pickUpTrail()
     {
@@ -213,8 +235,11 @@ public class Enemy_HandBrain : StateManager
 
         if (distance < 0.1f)
         {
-            myPoints.RemoveAt(addedPoints - 1);
             addedPoints--;
+            myPoints.RemoveAt(addedPoints);
+            //despawn
+            handTilesSpawned[addedPoints ].SetActive(false);
+
         }
     }
 
@@ -224,22 +249,57 @@ public class Enemy_HandBrain : StateManager
     private int startingPoints = 50;
     private int addedPoints = 0;
     private Vector3 lastPoint;
+
     public void leaveTrail()
     {
         var distance = Vector3.Distance(lastPoint, hand.position);
 
         if (distance > minVertaxDistance)
         {
-
             lastPoint = hand.position;
             //add new point linerender
 
             myPoints.Add(hand.position);
+
             addedPoints++;
 
-            updateTrail();
+                //spawn hand
+                //connect behind
+                GameObject newSpawned;
+                if ((handTilesSpawned.Count -1) < addedPoints)
+                {
+                    newSpawned = Instantiate(handTile, hand.position, hand.rotation);
+                    handTilesSpawned.Add(newSpawned);
+                }
+                else
+                {
+                    newSpawned = handTilesSpawned[addedPoints];
+                    newSpawned.transform.position = hand.position;
+                    newSpawned.transform.rotation = hand.rotation;
+
+                    newSpawned.SetActive(true);
+                }
+
+                newSpawned.transform.parent = transform;
+                newSpawned.transform.name = "handTile" + myPoints.Count;
+                currentHandTile = newSpawned;
+
+                //connect
+            //    connectFlaps(currentHandTile.transform.GetChild(0).GetChild(0), myPoints[addedPoints - 1]);
+
+                //  connect lasst with now
+               // connectFlaps( currentHandTile.transform.GetChild(0).GetChild(1),hand.transform.position);
+
+            //reuse
 
         }
+    }
+
+    public GameObject currentHandTile;
+    public Vector3 lastHandBuffer;
+    public void connectFlaps(Transform whatToConnect, Vector3 connectingWith)
+    {
+        whatToConnect.transform.position = connectingWith;
     }
     #endregion
 
