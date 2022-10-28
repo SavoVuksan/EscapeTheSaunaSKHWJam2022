@@ -10,11 +10,15 @@ public class GameManager : Singleton<GameManager>
     public HVRCanvasFade loseCanvas;
     public GameObject TowelSword;
     public HVRSocket WaistSocket;
+    public Player Player;
 
     [Header("DEBUG")]
     public bool hasTowel = true;
 
     // Start is called before the first frame update
+    private void Start() {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     public void StartGame()
     {

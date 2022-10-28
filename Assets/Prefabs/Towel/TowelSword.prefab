@@ -329,17 +329,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LostTowel
-        m_Mode: 1
+      - m_Target: {fileID: 6071928062890628869}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   GrabPointsMeta: []
   Grabbers: []
@@ -368,6 +368,18 @@ MonoBehaviour:
   UnsocketedClip: {fileID: 0}
   LinkedGrabbables: []
   SocketOrientation: {fileID: 0}
+--- !u!114 &8219900676727880754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429783814184024450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e46f0fc8cda9c54cb932769c3d4342c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4363271041307361197 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4819001077394492298, guid: 89beaf4105e49d94f9568bdae828d871,
@@ -499,6 +511,18 @@ MonoBehaviour:
   soundGroups: []
   slowDownInfluence: 1
   timeUntilAudioSourcesDestroyed: 2
+--- !u!114 &7142724189045167890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363271041307361197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164e211ad1ef3a54d94bd64151e9d924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &6071928062890628869 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -6183962969414622430, guid: 89beaf4105e49d94f9568bdae828d871,
