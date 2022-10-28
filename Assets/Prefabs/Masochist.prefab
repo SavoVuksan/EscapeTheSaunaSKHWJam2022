@@ -247,7 +247,7 @@ MonoBehaviour:
     pitchVariance: 0.1
     dopplerLevel: 0
     spread: 0
-    spatialBlend: 0.9
+    spatialBlend: 1
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}

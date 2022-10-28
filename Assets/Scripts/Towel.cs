@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Towel : MonoBehaviour
 {
     [SerializeField]
-    public float MinVelocityToHit = 5;
+    public float MinCollisionStrength = 40;
     private Transform _initialParent;
 
     private UnityAction<HurricaneVR.Framework.Core.Grabbers.HVRHandGrabber, HVRGrabbable> _onGrab;
@@ -42,9 +42,9 @@ public class Towel : MonoBehaviour
     }
 
     private void OnHit(Collision collision){
+        float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
         var hitable = collision.transform.parent.gameObject.GetComponent<IHitable>();
-        print(collision.relativeVelocity.magnitude);
-        if(hitable != null && collision.relativeVelocity.magnitude >= MinVelocityToHit){
+        if(hitable != null && collisionForce > MinCollisionStrength){
             hitable.OnHit(999);
         }
     }

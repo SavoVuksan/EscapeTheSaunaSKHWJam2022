@@ -96,7 +96,6 @@ public class Masochist : HumanoidEnemy
             {
                 _audioHandler.PlayRandomFromGroup("Dirtytalk");
                 DirtyTalkSilenceTimer.ResetTimer();
-                print("StartDirtyTalk");
             }
             yield return new WaitForEndOfFrame();
         }
