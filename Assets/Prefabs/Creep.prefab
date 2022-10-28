@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8634660948946640489}
   - component: {fileID: 5465312499983514659}
   - component: {fileID: 6596528467979543663}
+  - component: {fileID: 7933496555399042963}
   m_Layer: 0
   m_Name: Creep
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   _maxMoveSpeed: 2
   MoveActivationRadiusToPlayer: 20
   AttackRadius: 3.5
+  SoundCooldown: 5
 --- !u!195 &6596528467979543663
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -75,6 +77,41 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7933496555399042963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703479656237250516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10295d9086fec5643b4e689798ff55d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundType: 0
+  mixerGroup: {fileID: 0}
+  playOnStart: 
+  sounds: []
+  soundGroups:
+  - name: Grunting
+    clips:
+    - {fileID: 8300000, guid: 2533f2a564c68be4d9d0eb11f9a8b961, type: 3}
+    - {fileID: 8300000, guid: b541a9ac9b833dc4998c81e0c8c00703, type: 3}
+    - {fileID: 8300000, guid: 3914388fd057b344abcd7a87439dc339, type: 3}
+    - {fileID: 8300000, guid: fea817101bfb3f84b81073b9c8f66d6f, type: 3}
+    volume: 0.6
+    volumeVariance: 0.114
+    pitch: 1
+    pitchVariance: 0.2
+    dopplerLevel: 0
+    spread: 0
+    spatialBlend: 0.95
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  slowDownInfluence: 1
+  timeUntilAudioSourcesDestroyed: 2
 --- !u!1 &9177980760450005446
 GameObject:
   m_ObjectHideFlags: 0

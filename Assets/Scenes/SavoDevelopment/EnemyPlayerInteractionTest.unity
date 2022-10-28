@@ -1477,6 +1477,12 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7933496555399042963, guid: b0404746e56274b4c839ef8177495ede,
+        type: 3}
+      propertyPath: mixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 1c0c5acd218ce4a468512bc8e23ed422,
+        type: 2}
     - target: {fileID: 8634660948946640489, guid: b0404746e56274b4c839ef8177495ede,
         type: 3}
       propertyPath: m_RootOrder

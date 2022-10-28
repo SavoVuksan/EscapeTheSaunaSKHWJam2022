@@ -10,9 +10,13 @@ public class Creep : HumanoidEnemy
     public float MoveActivationRadiusToPlayer;
     [SerializeField]
     public float AttackRadius;
+    [SerializeField]
+    public float SoundCooldown = 5;
     private StateMachine _moveStateMachine;
     private StateMachine _attackStateMachine;
     private AttackState _attackState;
+    private AudioHandler _audioHandler;
+    private float _soundCooldownTimer;
     public override void Start()
     {
         base.Start();
@@ -21,7 +25,9 @@ public class Creep : HumanoidEnemy
         _moveStateMachine.SetNewState(new IdleState());
 
         _attackStateMachine = gameObject.AddComponent<StateMachine>();
+        _audioHandler = GetComponent<AudioHandler>();
         _attackStateMachine.Holder = this;
+        _soundCooldownTimer = SoundCooldown;
     }
 
     void Update()
@@ -31,6 +37,13 @@ public class Creep : HumanoidEnemy
             _attackState = new AttackState();
             _attackStateMachine.SetNewState(_attackState);
         }
+
+        if(_soundCooldownTimer <= 0){
+            _audioHandler.PlayRandomFromGroup("Grunting");
+            _soundCooldownTimer = SoundCooldown;
+        }
+        _soundCooldownTimer -= Time.deltaTime;
+        _soundCooldownTimer = Mathf.Max(0, _soundCooldownTimer);
     }
 
     public override void OnHit(float damage)
