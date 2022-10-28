@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
     public HVRCanvasFade winCanvas;
     public HVRCanvasFade loseCanvas;
-    public GameObject TowerSword;
+    public GameObject TowelSword;
     public HVRSocket WaistSocket;
 
     [Header("DEBUG")]

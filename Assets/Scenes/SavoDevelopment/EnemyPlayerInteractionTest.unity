@@ -1193,6 +1193,11 @@ PrefabInstance:
       propertyPath: hasTowel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7725750243430880668, guid: 69245ac8cccbfee47914d15d0a150949,
+        type: 3}
+      propertyPath: TowelSword
+      value: 
+      objectReference: {fileID: 772315113}
     - target: {fileID: 8305289117088139801, guid: 69245ac8cccbfee47914d15d0a150949,
         type: 3}
       propertyPath: m_Name
@@ -1454,26 +1459,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5465312499983514659, guid: b0404746e56274b4c839ef8177495ede,
         type: 3}
-      propertyPath: AttackRadius
-      value: 1.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 5465312499983514659, guid: b0404746e56274b4c839ef8177495ede,
-        type: 3}
-      propertyPath: SoundTimer.OneShot
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5465312499983514659, guid: b0404746e56274b4c839ef8177495ede,
-        type: 3}
-      propertyPath: SoundTimer.Duration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5465312499983514659, guid: b0404746e56274b4c839ef8177495ede,
-        type: 3}
-      propertyPath: SoundTimer.AutoStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5465312499983514659, guid: b0404746e56274b4c839ef8177495ede,
-        type: 3}
       propertyPath: SoundTimer.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1497,12 +1482,6 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7933496555399042963, guid: b0404746e56274b4c839ef8177495ede,
-        type: 3}
-      propertyPath: mixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: 1c0c5acd218ce4a468512bc8e23ed422,
-        type: 2}
     - target: {fileID: 8634660948946640489, guid: b0404746e56274b4c839ef8177495ede,
         type: 3}
       propertyPath: m_RootOrder

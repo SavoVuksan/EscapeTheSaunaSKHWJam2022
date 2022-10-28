@@ -15,6 +15,7 @@ public class Timer
     public bool TimeOut = false;
     private bool _startTimer = false;
     private MonoBehaviour _monoBehaviour;
+    private Coroutine _coroutine;
     public event Action TimeOutEvent;
     public bool Running
     {
@@ -29,7 +30,10 @@ public class Timer
         _monoBehaviour = monoBehaviour;
         TimeLeft = Duration;
         _startTimer = AutoStart;
-        _monoBehaviour.StartCoroutine(Update());
+        if (_coroutine == null)
+        {
+            _coroutine = _monoBehaviour.StartCoroutine(Update());
+        }
     }
 
     // Update is called once per frame
@@ -72,4 +76,12 @@ public class Timer
             _startTimer = true;
         }
     }
+
+    public void StopTimer(){
+        _startTimer = false;
+        TimeLeft = Duration;
+        TimeOut = false;
+    }
+
+    
 }

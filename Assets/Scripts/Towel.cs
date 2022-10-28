@@ -9,7 +9,7 @@ public class Towel : MonoBehaviour
 
     private Transform _initialParent;
 
-    private UnityAction<HurricaneVR.Framework.Core.Grabbers.HVRHandGrabber,HVRGrabbable> _onGrab;
+    private UnityAction<HurricaneVR.Framework.Core.Grabbers.HVRHandGrabber, HVRGrabbable> _onGrab;
     private void Start()
     {
         _initialParent = transform.parent;
@@ -27,7 +27,13 @@ public class Towel : MonoBehaviour
         GetComponent<HVRGrabbable>().HandGrabbed.RemoveListener(_onGrab);
     }
 
-    private void OnGrab(HurricaneVR.Framework.Core.Grabbers.HVRHandGrabber arg1, HVRGrabbable arg2) {
+    private void OnGrab(HurricaneVR.Framework.Core.Grabbers.HVRHandGrabber arg1, HVRGrabbable arg2)
+    {
+        ReparentOriginal();
+    }
+
+    public void ReparentOriginal()
+    {
         transform.parent = _initialParent;
     }
 }

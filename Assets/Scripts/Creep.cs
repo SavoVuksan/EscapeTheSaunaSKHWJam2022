@@ -11,10 +11,10 @@ public class Creep : HumanoidEnemy
     [SerializeField]
     public float AttackRadius;
     [SerializeField]
-    public Timer SoundTimer;
+    public Timer AttackTimer;
+    [SerializeField]
+    public Timer TowelDropTimer;
     private StateMachine _moveStateMachine;
-    private StateMachine _attackStateMachine;
-    private AttackState _attackState;
     private AudioHandler _audioHandler;
     public override void Start()
     {
@@ -22,37 +22,42 @@ public class Creep : HumanoidEnemy
         _moveStateMachine = gameObject.AddComponent<StateMachine>();
         _moveStateMachine.Holder = this;
         _moveStateMachine.SetNewState(new IdleState());
-
-        _attackStateMachine = gameObject.AddComponent<StateMachine>();
         _audioHandler = GetComponent<AudioHandler>();
-        _attackStateMachine.Holder = this;
 
 
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
-        SoundTimer.Init(this);
+        base.OnEnable();
+        AttackTimer.Init(this);
+        TowelDropTimer.Init(this);
         SoundTimer.TimeOutEvent += PlaySound;
+        AttackTimer.TimeOutEvent += Attack;
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
+        base.OnDisable();
         SoundTimer.TimeOutEvent -= PlaySound;
+        AttackTimer.TimeOutEvent -= Attack;
     }
 
     void Update()
     {
-        if (GetDistanceToPlayer() < AttackRadius && _attackState == null)
+        if (GetDistanceToPlayer() < AttackRadius)
         {
-            _attackState = new AttackState();
-            _attackStateMachine.SetNewState(_attackState);
+            AttackTimer.StartTimer();
+        }
+        else
+        {
+            AttackTimer.StopTimer();
         }
     }
 
     public override void OnHit(float damage)
     {
-        _moveStateMachine.SetNewState(new HitState());
+        // Do something if hit.
     }
     public void OnDrawGizmos()
     {
@@ -65,6 +70,21 @@ public class Creep : HumanoidEnemy
     private void PlaySound()
     {
         _audioHandler.PlayRandomFromGroup("Grunting");
+    }
+
+    private void Attack()
+    {
+        _audioHandler.Play("Grab");
+        if (GameManager.Instance.hasTowel)
+        {
+            GameManager.Instance.WaistSocket.ForceRelease();
+            GameManager.Instance.TowelSword.transform.parent = transform;
+        }
+        else
+        {
+            GameManager.Instance.LoseGame();
+        }
+        _moveStateMachine.SetNewState(new LeaveState());
     }
 
 
@@ -102,6 +122,7 @@ public class Creep : HumanoidEnemy
         }
         public override void ExitState(StateMachine stateMachine)
         {
+            Self.NavMeshAgent.SetDestination(Self.transform.position);
         }
         public override void FixedUpdateState(StateMachine stateMachine)
         {
@@ -111,77 +132,37 @@ public class Creep : HumanoidEnemy
         {
         }
     }
-
-    private class HitState : HumanoidState
-    {
-        public override void EnterState(StateMachine stateMachine)
-        {
-            base.EnterState(stateMachine);
-        }
-
-
-        public override void ExitState(StateMachine stateMachine)
-        {
-        }
-
-
-        public override void FixedUpdateState(StateMachine stateMachine)
-        {
-        }
-
-
-        public override void UpdateState(StateMachine stateMachine)
-        {
-        }
-    }
-
-    private class AttackState : HumanoidState
-    {
-
-        public override void EnterState(StateMachine stateMachine)
-        {
-            base.EnterState(stateMachine);
-            if (GameManager.Instance.hasTowel)
-            {
-                GameManager.Instance.WaistSocket.ForceRelease();
-                GameManager.Instance.TowerSword.transform.parent = stateMachine.Holder.transform;
-
-
-            }
-            else
-            {
-                GameManager.Instance.LoseGame();
-            }
-
-            stateMachine.SetNewState(new LeaveState());
-            // Add logic for towel grabbing and schlong tapping
-        }
-
-        public override void ExitState(StateMachine stateMachine)
-        {
-        }
-
-        public override void FixedUpdateState(StateMachine stateMachine)
-        {
-        }
-
-        public override void UpdateState(StateMachine stateMachine)
-        {
-        }
-    }
-
     private class LeaveState : HumanoidState
     {
+        public override void EnterState(StateMachine stateMachine)
+        {
+            base.EnterState(stateMachine);
+            (Self as Creep).TowelDropTimer.StartTimer();
+            (Self as Creep).TowelDropTimer.TimeOutEvent += DropTowel;
+            Self.NavMeshAgent.stoppingDistance = 0;
+        }
         public override void ExitState(StateMachine stateMachine)
         {
+             (Self as Creep).TowelDropTimer.TimeOutEvent -= DropTowel;
         }
 
         public override void FixedUpdateState(StateMachine stateMachine)
         {
+            Self.NavMeshAgent.SetDestination(Self.transform.position + (Self.transform.position - Self.Player.transform.position).normalized);
         }
 
         public override void UpdateState(StateMachine stateMachine)
         {
+        }
+
+        private void DropTowel(){
+            GameManager.Instance.TowelSword.GetComponent<Towel>().ReparentOriginal();
+
+            DestroySelf();
+        }
+
+        private void DestroySelf(){
+            Destroy(Self.gameObject);
         }
     }
 
