@@ -96,7 +96,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_9EF27AEB: 30
+    - Vector1_9EF27AEB: 45
     - _AlphaClip: 0
     - _BUILTIN_QueueControl: -1
     - _BUILTIN_QueueOffset: 0
