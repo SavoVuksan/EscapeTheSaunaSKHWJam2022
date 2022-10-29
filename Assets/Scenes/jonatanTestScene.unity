@@ -323,6 +323,9 @@ MonoBehaviour:
   startOffsetRight: {x: 0.13, y: 0, z: 0}
   startOffsetLeft: {x: -0.13, y: 0, z: 0}
   footOffset: {x: 0, y: 0.09, z: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &62829976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9086981371666977950, guid: c7016b7c0ac545c49a854fcb58d840f6,
@@ -4312,7 +4315,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0f8e6d1a86ab9c449d37b9c97b5d37f, type: 2}
+  - {fileID: 2100000, guid: 29086f5964eade543951d8e5db96a707, type: 2}
+  - {fileID: 2100000, guid: 9c1a28d8b531ddc47b92abde4d20abb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4350,7 +4354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074087413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.96, y: 7.863, z: -16.02}
+  m_LocalPosition: {x: 20.96, y: 7.59, z: -13.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
