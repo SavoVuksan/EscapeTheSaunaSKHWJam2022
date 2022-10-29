@@ -2,7 +2,31 @@ fileFormatVersion: 2
 guid: 5382006008eb9914d87a167efef21d77
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 5945329433677214185
+    second: Bones leather|Bones handAction
+  - first:
+      74: 3580841930983309665
+    second: Bones fat|Bones fatAction
+  - first:
+      74: -7443558550327867409
+    second: Bones fat|Bones handAction
+  - first:
+      74: -6756103135864870361
+    second: Bones.thin|Bones fatAction
+  - first:
+      74: 5450441273282445492
+    second: Bones.thin|Bones handAction
+  - first:
+      74: 1807593211931585459
+    second: Bones hand|Bones handAction
+  - first:
+      74: 8284849742324113730
+    second: Bones|Bones fatAction
+  - first:
+      74: -2769638678160138002
+    second: Bones|Bones handAction
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -12,9 +36,9 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 1
+    resampleCurves: 0
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 1
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -23,8 +47,8 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
-    animationCompression: 1
+    importConstraints: 1
+    animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
