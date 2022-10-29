@@ -1,3 +1,4 @@
+using FIMSpace.FTail;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,10 @@ public class Masochist : HumanoidEnemy
     private bool _reachedPlayer;
     private Coroutine _currentDirtyTalkCoroutine;
     private AudioHandler _audioHandler;
+
+    public GameObject jizzEmission;
+    public TailAnimator2 boner;
+
 
     public bool ReachedPlayer
     {
@@ -84,6 +89,9 @@ public class Masochist : HumanoidEnemy
     public override void OnHit(float damage)
     {
         _gotHit = true;
+        jizzEmission.SetActive(true);
+        boner.Gravity = Vector3.up * 4 + 4*transform.forward;
+        _audioHandler.PlayRandomFromGroup("Cumming");
     }
 
     private IEnumerator DirtyTalk()
