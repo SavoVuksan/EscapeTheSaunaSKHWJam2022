@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 59.010082
       objectReference: {fileID: 0}
+    - target: {fileID: -4157456459163486426, guid: d08317f5392365744bc4aafa5550e491,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 054a4080755f9c345b61f7cc60bf9231, type: 2}
     - target: {fileID: -3321425720805729608, guid: d08317f5392365744bc4aafa5550e491,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -243,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d08317f5392365744bc4aafa5550e491,
         type: 3}
       propertyPath: m_Name
-      value: Hand (1)
+      value: Characters
       objectReference: {fileID: 0}
     - target: {fileID: 1014117245012304875, guid: d08317f5392365744bc4aafa5550e491,
         type: 3}
@@ -460,7 +465,7 @@ Animator:
   m_GameObject: {fileID: 5708928934705758281}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bc71db4480cc13646af8c0dab0498975, type: 2}
+  m_Controller: {fileID: 9100000, guid: f8152c0a4d2b31a458cd006813b1ae33, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
