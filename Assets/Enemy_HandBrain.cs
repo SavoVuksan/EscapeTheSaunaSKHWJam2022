@@ -19,6 +19,10 @@ public class Enemy_HandBrain : StateManager
     public bool retreaving;
     private GameObject stealObj;
     private List<Vector3> myPoints = new List<Vector3>();
+
+
+    private float range = 12;
+
     public void OnEnable()
     {
         Init();
@@ -44,7 +48,6 @@ public class Enemy_HandBrain : StateManager
         //   searchForPlayer(out player);
 
 
-
         if (!retreaving)
         {
             if(updateTarget)
@@ -67,11 +70,20 @@ public class Enemy_HandBrain : StateManager
     {
         base.FixedUpdate();
 
-        Invoke("chasePlayer", 1);
+    }
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, range);
     }
     public void chasePlayer()
     {
-        if(lingering|| retreaving)
+        var dist = Vector3.Distance(transform.position, player.transform.position);
+        if(dist > range)
+        {
+            retreaving = true;
+            return;
+        }
+            if (lingering|| retreaving )
         {
             return;
         }
